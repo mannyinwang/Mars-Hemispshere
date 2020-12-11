@@ -20,8 +20,10 @@ def index():
 @app.route('/scrape')
 def scrape():
     mars = mongo.db.mars
+    # Run the function to get scrape information from all the databases
     mars_data = scraping.scrape_all()
     print(mars_data)
+    # Update the mars database
     mars.update({}, mars_data, upsert=True)
     return "Scraping Successful"
 
